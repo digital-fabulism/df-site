@@ -7,4 +7,4 @@ pip-log.txt
 *.swp
 *collected_static*
 *wsgi.py
-*settings.py
+*production.py
