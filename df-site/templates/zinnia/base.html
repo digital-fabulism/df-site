@@ -1,0 +1,65 @@
+{% extends "zinnia:zinnia/base.html" %}
+{% load zinnia i18n %}
+
+{% block sidebar %}
+<aside id="widget-welcome" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Welcome!" %}
+  </div>
+  <div class="panel-body">
+      {% comment %}<p>
+      {% trans "This is the home of the Digital Fabulists." %}
+      </p>{% endcomment %}
+    <p class="text-center">{% blocktrans %}
+    The <a href="https://en.wikipedia.org/wiki/Ada_Lovelace">Ada Lovelace</a> Academy of Steampunk and Digital Humanism<br />
+    ~ Department of Digital Fabulists ~<br />
+    Analysts and Metaphysicians<br />
+    by appointment to <a href=https://en.wikipedia.org/wiki/Metis_%28mythology%29>Metis</a>, <a href="https://en.wikipedia.org/wiki/Eris_%28mythology%29">Eris</a>, <a href="https://en.wikipedia.org/wiki/Eros">Eros</a> & <a href="https://en.wikipedia.org/wiki/Loki">Loki</a><br />
+    Robot, AI & Cyborg Ethics Consultants<br />
+    Professional Amateurs
+    {% endblocktrans %}
+    
+    {% comment %}{% trans "Here you will find our musings, art and papers based on a new Digital Humanities - less stuffy, more playful, more personal, more digital." %} {% endcomment %}
+    </p>
+  </div>
+</aside>
+<aside id="widget-categories" class="widget panel panel-default">
+  <div class="panel-heading">
+    {% trans "Categories" %}
+  </div>
+  {% get_categories %}
+</aside>
+{% if user.is_authenticated %}
+<aside id="widget-tools" class="widget panel panel-danger">
+  <div class="panel-heading">
+    {% trans "Tools" %}
+  </div>
+  <ul class="list-group">
+    {% if perms.zinnia %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:app_list' 'zinnia' %}" title="{% trans "Dashboard" %}">
+        <span class="glyphicon glyphicon-book"></span>
+        {% trans "Dashboard" %}
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.zinnia.add_entry %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:zinnia_entry_add' %}" title="{% trans "Post an entry" %}">
+        <span class="glyphicon glyphicon-pencil"></span>
+        {% trans "Post an entry" %}
+      </a>
+    </li>
+    {% endif %}
+    {% block admin-tools %}
+    {% endblock admin-tools %}
+    <li class="list-group-item">
+      <a href="{% url 'admin:logout' %}" title="{% trans "Log out" %}">
+        <span class="glyphicon glyphicon-off"></span>
+        {% trans "Log out" %}
+      </a>
+    </li>
+  </ul>
+</aside>
+{% endif %}
+{% endblock sidebar %}
