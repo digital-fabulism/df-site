@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django_comments',
     'mptt',
     'tagging',
+    'zinnia_bootstrap',
     'zinnia',
 )
 
